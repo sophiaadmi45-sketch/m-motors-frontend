@@ -1,31 +1,45 @@
-import { useState, useEffect } from 'react';
-import { getBackendStatus } from './lib/api';   // Import du fichier central
+import { useVehicles } from './hooks/useVehicles';
+import Header from './components/Header';
+import Hero from './components/Hero';
+import VehicleCard from './components/VehicleCard';
+import Footer from './components/Footer';
+import './App.css';
 
 function App() {
-  const [backendStatus, setBackendStatus] = useState("Connexion au backend en cours...");
-
-  useEffect(() => {
-    getBackendStatus()
-      .then(data => setBackendStatus(data))
-      .catch(() => setBackendStatus("❌ Erreur de connexion"));
-  }, []);
+  
+  const {
+    filteredVehicles,
+    searchTerm,
+    setSearchTerm,
+    typeFilter,
+    setTypeFilter,
+    sortOption,
+    setSortOption
+  } = useVehicles();
 
   return (
-    <div style={{ padding: "40px", fontFamily: "Arial, sans-serif", textAlign: "center" }}>
-      <h1>🚗 M-Motors</h1>
-      
-      <div style={{ 
-        margin: "30px auto", 
-        padding: "20px", 
-        backgroundColor: "#f0f8ff", 
-        borderRadius: "10px", 
-        maxWidth: "600px" 
-      }}>
-        <strong>Statut Backend :</strong><br />
-        {backendStatus}
-      </div>
+    <div className="app">
+      <Header />
 
-      <p>Si tu vois le message du backend ci-dessus, la connexion fonctionne ✅</p>
+      <Hero 
+        searchTerm={searchTerm} setSearchTerm={setSearchTerm}
+        typeFilter={typeFilter} setTypeFilter={setTypeFilter}
+        sortOption={sortOption} setSortOption={setSortOption}
+      />
+
+      <main className="main-content">
+        <p className="results-count">
+          {filteredVehicles.length} véhicule{filteredVehicles.length > 1 ? 's' : ''} trouvé{filteredVehicles.length > 1 ? 's' : ''}
+        </p>
+
+        <div className="vehicles-grid">
+          {filteredVehicles.map(vehicle => (
+            <VehicleCard key={vehicle.id} vehicle={vehicle} />
+          ))}
+        </div>
+      </main>
+
+      <Footer />
     </div>
   );
 }
