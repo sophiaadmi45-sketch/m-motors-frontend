@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from '../config';
 import './VehicleDossier.css';
 
 export default function VehicleDossier() {
     const { id } = useParams();
+    const navigate = useNavigate();
     const [tab, setTab] = useState('form');
     const [form, setForm] = useState({ name: '', email: '', type: 'LLD', idFile: null, domFile: null });
     const [liste, setListe] = useState([]);
@@ -53,6 +54,9 @@ export default function VehicleDossier() {
             ) : (
                 <div>
                     <input type="email" placeholder="Votre email" value={form.email} onChange={e => chercherSuivi(e.target.value)} className="suivi-input"/>
+                    <button className="btn btn-go-dashboard" onClick={() => navigate('/dashboard')}>
+                    Accéder à mon espace
+                    </button>
                     {liste.map(d => (
                         <div key={d.id} className="suivi-item">
                             Dossier N°{d.id} ({d.typeContrat}) : <strong>{d.statut}</strong>

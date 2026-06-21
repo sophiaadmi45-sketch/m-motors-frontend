@@ -5,6 +5,7 @@ import './index.css'
 import App from './App.jsx'
 import VehicleDetail from './components/VehicleDetail.jsx'
 import VehicleDossier from './components/VehicleDossier';
+import Dashboard from './components/Dashboard.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -13,6 +14,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/" element={<App />} />
         <Route path="/vehicule/:id" element={<VehicleDetail />} />
         <Route path="/dossier/:id" element={<VehicleDossier />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,
