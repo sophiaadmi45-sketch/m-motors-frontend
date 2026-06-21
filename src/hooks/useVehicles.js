@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { API_BASE_URL } from '../config';
 
 export function useVehicles() {
   const [vehicles, setVehicles] = useState([]);
@@ -9,7 +10,7 @@ export function useVehicles() {
 
 
   useEffect(() => {
-    fetch('http://localhost:8080/vehicles')
+    fetch(`${API_BASE_URL}/vehicles`)
       .then(res => res.json())
       .then(data => {
         setVehicles(data);

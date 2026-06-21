@@ -2,6 +2,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Header from './Header';
 import Footer from './Footer';
+import { API_BASE_URL } from '../config';
 import VehicleSpecs from './VehicleSpecs';
 import VehiclePrices from './VehiclePrices';
 import './VehicleDetail.css'; 
@@ -13,7 +14,7 @@ function VehicleDetail() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/vehicles/${id}`)
+    fetch(`${API_BASE_URL}/vehicles/${id}`)
       .then(res => {
         if (!res.ok) throw new Error('Erreur serveur');
         return res.json();
