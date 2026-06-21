@@ -1,0 +1,140 @@
+.back-link {
+  text-decoration: none;
+  color: var(--accent);
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  transition: color 0.2s ease;
+}
+
+.back-link:hover {
+  color: var(--accent-hover);
+}
+
+.detail-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background-color: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 0.25rem 0.6rem rgba(0, 0, 0, 0.05);
+}
+
+.detail-image {
+  width: 100%;
+  height: auto;
+  max-height: 25rem;
+  object-fit: cover;
+  border-radius: 0.75rem;
+}
+
+.detail-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.detail-badge {
+  display: inline-block;
+  align-self: flex-start;
+  background-color: #f1f5f9;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.25rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.detail-info h2 {
+  font-size: 2rem;
+  color: var(--primary);
+  margin: 0;
+}
+
+.detail-km {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.detail-specs h4 {
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.detail-specs ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.detail-description-text {
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+.detail-prices {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  border-top: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.price-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.price-title {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+.price-amount {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.price-amount-lld {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.btn-dossier {
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-dossier:hover {
+  background-color: var(--accent-hover);
+}
+
+.detail-loading, .detail-error {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--text-light);
+  margin-top: 3rem;
+}
+
+@media (min-width: 48rem) {
+  .detail-container {
+    flex-direction: row;
+    padding: 2.5rem;
+  }
+  .detail-media, .detail-info {
+    flex: 1;
+  }
+}

@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 function VehicleCard({ vehicle }) {
   return (
     <div className="vehicle-card">
@@ -15,7 +17,9 @@ function VehicleCard({ vehicle }) {
         <p className="description">{vehicle.description}</p>
         
         {vehicle.disponible && (
-          <button className="btn-reserve">Je suis intéressé</button>
+          <Link to={`/vehicule/${vehicle.id}`} className="btn-reserve">
+           Voir les détails
+          </Link>
         )}
       </div>
     </div>
