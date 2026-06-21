@@ -46,7 +46,7 @@ function VehicleDetail() {
             <p className="detail-description-text">{vehicle.description}</p>
             <VehiclePrices type={vehicle.type} prix={vehicle.prix} />
 
-            <button onClick={() => navigate(`/depot-dossier/${id}`)} className="btn-dossier">
+            <button onClick={() => navigate(`/dossier/${id}`)} className="btn-dossier">
               Je dépose mon dossier
             </button>
           </div>
