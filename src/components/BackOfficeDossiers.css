@@ -107,7 +107,7 @@
 }
 
 /* ==========================================================================
-   TABLEAU STRUCTURÉ ET FIXÉ
+   TABLEAU STRUCTURÉ ET FIXÉ (POURCENTAGES)
    ========================================================================== */
 .table-responsive {
   width: 100%;
@@ -124,7 +124,6 @@
   text-align: left;
   table-layout: fixed; 
 }
-
 
 .bo-table th:nth-child(1), .bo-table td:nth-child(1) { width: 10%; } /* ID */
 .bo-table th:nth-child(2), .bo-table td:nth-child(2) { width: 20%; } /* Client */
@@ -196,7 +195,7 @@
   display: inline-flex;
   align-items: center;
   padding: 0.25rem 0.625rem;
-  border-radius: 9999px;
+  border-radius: 62.4rem; /* Équivalent d'un grand radius fluide */
   font-weight: 600;
   font-size: 0.75rem;
   text-transform: uppercase;
@@ -208,7 +207,7 @@
 .badge-status.refuse { background-color: #fee2e2; color: #b91c1c; }
 
 /* ==========================================================================
-   BOUTONS D'ACTION (MODERN & HORIZONTAL DESIGN)
+   BOUTONS D'ACTION (MODERN & DESIGN HORIZONTAL)
    ========================================================================== */
 .bo-table td:nth-child(7) {
   display: flex;
@@ -259,7 +258,6 @@
 .btn-sm-reject:active {
   transform: translateY(0);
 }
-
 
 .bo-decision-actions .btn-validate { background-color: #16a34a; }
 .bo-decision-actions .btn-validate:hover { background-color: #15803d; }

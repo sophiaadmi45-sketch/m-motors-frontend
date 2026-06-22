@@ -17,25 +17,21 @@ export default function BackOfficeDossiers() {
         }
     };
 
-   
     useEffect(() => {
         chargerDossiers();
     }, []);
 
-    
     const [filtreStatut, setFiltreStatut] = useState('TOUS');
     const [commentaireSaisi, setCommentaireSaisi] = useState('');
     const [dossierSelectionne, setDossierSelectionne] = useState(null);
     const [actionType, setActionType] = useState(''); // 'VALIDE' ou 'REFUSE'
 
-   
     const preparerAction = (id, type) => {
         setDossierSelectionne(id);
         setActionType(type);
-        setCommentaireSaisi(''); // Reset du commentaire
+        setCommentaireSaisi(''); 
     };
 
-    
     const soumettreDecision = async (e) => {
         e.preventDefault();
         if (!commentaireSaisi.trim()) {
@@ -44,21 +40,17 @@ export default function BackOfficeDossiers() {
         }
 
         try {
-            
-    const res = await fetch(`${API_BASE_URL}/api/dossiers/${dossierSelectionne}/statut`, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-        statut: actionType,
-        commentaireHistorique: commentaireSaisi
-    })
-});
+            const res = await fetch(`${API_BASE_URL}/api/dossiers/${dossierSelectionne}/statut`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    statut: actionType,
+                    commentaireHistorique: commentaireSaisi
+                })
+            });
 
             if (res.ok) {
-                
                 await chargerDossiers();
-                
-                
                 setDossierSelectionne(null);
                 setActionType('');
                 setCommentaireSaisi('');
@@ -70,7 +62,6 @@ export default function BackOfficeDossiers() {
         }
     };
 
-    
     const dossiersFiltres = dossiers.filter(d => {
         if (filtreStatut === 'TOUS') return true;
         return d.statut === filtreStatut;
@@ -80,7 +71,6 @@ export default function BackOfficeDossiers() {
         <div className="bo-container">
             <h1 className="bo-title">Espace Back-Office — Gestion des Dossiers Clients</h1>
             
-        
             <div className="bo-filters-bar">
                 <label className="filter-label">Filtrer par statut :</label>
                 <select 
@@ -95,7 +85,6 @@ export default function BackOfficeDossiers() {
                 </select>
             </div>
 
-           
             {dossierSelectionne && (
                 <div className="bo-decision-box">
                     <h3>Traitement du dossier #DOS-{dossierSelectionne} ({actionType === 'VALIDE' ? 'Validation' : 'Refus'})</h3>
@@ -106,7 +95,7 @@ export default function BackOfficeDossiers() {
                                 required
                                 value={commentaireSaisi}
                                 onChange={e => setCommentaireSaisi(e.target.value)}
-                                placeholder="Saisissez un motif précis (ex: Pièces conformes, Document illisible...)"
+                                placeholder="Saisissez un motif précis..."
                                 className="bo-textarea"
                             />
                         </div>
@@ -122,7 +111,6 @@ export default function BackOfficeDossiers() {
                 </div>
             )}
 
-            
             <div className="table-responsive">
                 <table className="bo-table">
                     <thead>
@@ -151,36 +139,18 @@ export default function BackOfficeDossiers() {
                                     </span>
                                 </td>
                                 <td>
-    
-    {d.pieceIdentiteName ? (
-        <a 
-            href={d.pieceIdentiteName.toLowerCase().endsWith('.pdf') 
-                ? "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" 
-                : "https://upload.wikimedia.org/wikipedia/commons/c/c1/Id_card_template.jpg"} 
-            target="_blank" 
-            rel="noreferrer" 
-            className="bo-link"
-        >
-            📄 {d.pieceIdentiteName}
-        </a>
-    ) : <span className="text-muted">Aucun fichier</span>}
-    
-    <br />
-
-    
-    {d.justificatifDomicileName ? (
-        <a 
-            href={d.justificatifDomicileName.toLowerCase().endsWith('.pdf') 
-                ? "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" 
-                : "https://upload.wikimedia.org/wikipedia/commons/d/d5/Facture_Exemple.jpg"} 
-            target="_blank" 
-            rel="noreferrer" 
-            className="bo-link"
-        >
-            🏠 {d.justificatifDomicileName}
-        </a>
-    ) : <span className="text-muted">Aucun fichier</span>}
-</td>
+                                    {d.pieceIdentiteName ? (
+                                        <a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" target="_blank" rel="noreferrer" className="bo-link">
+                                            📄 {d.pieceIdentiteName}
+                                        </a>
+                                    ) : <span className="text-muted">Aucun fichier</span>}
+                                    <br />
+                                    {d.justificatifDomicileName ? (
+                                        <a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" target="_blank" rel="noreferrer" className="bo-link">
+                                            🏠 {d.justificatifDomicileName}
+                                        </a>
+                                    ) : <span className="text-muted">Aucun fichier</span>}
+                                </td>
                                 <td className="text-comment">{d.commentaireHistorique || <span className="no-comment">—</span>}</td>
                                 <td>
                                     <button className="btn-action btn-sm-validate" onClick={() => preparerAction(d.id, 'VALIDE')}>

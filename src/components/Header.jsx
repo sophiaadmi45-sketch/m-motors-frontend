@@ -15,11 +15,12 @@ function Header() {
             <p className="logo-subtitle">La spécialité de la mobilité automobile : Achat, Location & Service</p>
           </div> 
         </div>
-        <nav className="nav">
-          <Link to="/">Accueil</Link>
-          <Link to="/dashboard">Mon Espace Client</Link>
-          <Link to="/back-office/dossiers" className="nav-pro-link">Espace Pro</Link>
-        </nav>
+       
+<nav className="nav">
+  <Link to="/">Accueil</Link>
+  <Link to="/dashboard">Mon Espace Client</Link>
+  <Link to="/back-office/dossiers">Espace Pro</Link>
+</nav>
       </div>
     </header>
   );

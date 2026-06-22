@@ -1,5 +1,7 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import Header from './Header';
+import Footer from './Footer';
 import { API_BASE_URL } from '../config';
 import VehicleSpecs from './VehicleSpecs';
 import VehiclePrices from './VehiclePrices';
@@ -21,14 +23,14 @@ function VehicleDetail() {
       .catch(() => setLoading(false)); 
   }, [id]);
 
-  if (loading) return <div className="app"><main className="main-content"><p className="detail-status">Chargement...</p></main></div>;
+  if (loading) return <div className="app"><Header /><main className="main-content"><p className="detail-status">Chargement...</p></main><Footer /></div>;
   
   
-  if (!vehicle) return <div className="app"><main className="main-content"><p className="detail-status">Véhicule introuvable ou indisponible (Erreur BDD)</p><Link to="/" className="back-link"> Retour</Link></main></div>;
+  if (!vehicle) return <div className="app"><Header /><main className="main-content"><p className="detail-status">Véhicule introuvable ou indisponible (Erreur BDD)</p><Link to="/" className="back-link"> Retour</Link></main><Footer /></div>;
 
   return (
     <div className="app">
-     
+      <Header /> 
       <main className="main-content">
         <Link to="/" className="back-link"> Retour</Link>
         <div className="detail-container">
@@ -50,7 +52,7 @@ function VehicleDetail() {
           </div>
         </div>
       </main>
-     
+      <Footer /> 
     </div>
   );
 }

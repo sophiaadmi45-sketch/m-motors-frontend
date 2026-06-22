@@ -1,0 +1,56 @@
+/* Structure de la page */
+.admin-catalog-container {
+    padding: 1.5rem;
+    font-family: sans-serif;
+}
+
+/* Formulaire d'ajout/modification */
+.admin-form {
+    margin-bottom: 2rem;
+    max-width: 25rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-input, .form-select, .form-textarea {
+    width: 100%;
+    padding: 0.5rem;
+    box-sizing: border-box;
+}
+
+.form-textarea {
+    height: 6rem;
+}
+
+/* Boutons */
+.btn-submit {
+    padding: 0.6rem 1.2rem;
+    cursor: pointer;
+}
+
+.btn-cancel {
+    padding: 0.4rem 1rem;
+    margin-top: 0.5rem;
+    cursor: pointer;
+}
+
+/* Tableau du catalogue */
+.catalog-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    margin-top: 1rem;
+}
+
+.catalog-table th, .catalog-table td {
+    padding: 0.8rem;
+    border: 0.05rem solid #ccc;
+}
+
+.btn-action {
+    margin-right: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+}

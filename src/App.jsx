@@ -17,9 +17,7 @@ function App() {
 
   return (
     <div className="app">
-      
-
-      <Hero 
+     <Hero 
         searchTerm={searchTerm} setSearchTerm={setSearchTerm}
         typeFilter={typeFilter} setTypeFilter={setTypeFilter}
         sortOption={sortOption} setSortOption={setSortOption}

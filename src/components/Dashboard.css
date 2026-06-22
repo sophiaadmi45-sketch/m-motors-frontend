@@ -100,3 +100,15 @@
   font-size: 1.125rem;
   margin: 0;
 }
+
+.text-comment {
+  font-style: italic;
+  color: #495057;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+}
+
+.no-comment {
+  color: #adb5bd;
+  font-style: normal;
+}
