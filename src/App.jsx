@@ -1,8 +1,6 @@
 import { useVehicles } from './hooks/useVehicles';
-import Header from './components/Header';
 import Hero from './components/Hero';
 import VehicleCard from './components/VehicleCard';
-import Footer from './components/Footer';
 import './App.css';
 
 function App() {
@@ -19,7 +17,7 @@ function App() {
 
   return (
     <div className="app">
-      <Header />
+      
 
       <Hero 
         searchTerm={searchTerm} setSearchTerm={setSearchTerm}
@@ -39,7 +37,7 @@ function App() {
         </div>
       </main>
 
-      <Footer />
+      
     </div>
   );
 }
