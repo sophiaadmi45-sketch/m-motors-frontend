@@ -1,13 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { API_BASE_URL } from '../config';
 import './Dashboard.css';
 
 export default function Dashboard() {
    
-    const [dossiers] = useState([
-        { id: 101, typeContrat: 'LLD', statut: 'EN_COURS' },
-        { id: 102, typeContrat: 'ACHAT', statut: 'VALIDE' },
-        { id: 103, typeContrat: 'LLD', statut: 'REFUSE' }
-    ]);
+    const location = useLocation();
+    const [dossiers, setDossiers] = useState([]);
+    const clientEmail = location.state?.email || "";
+
+    useEffect(() => {
+        if (clientEmail) {
+            fetch(`${API_BASE_URL}/api/dossiers/suivi?email=${clientEmail}`)
+                .then(res => {
+                    if (res.ok) return res.json();
+                    return [];
+                })
+                .then(data => setDossiers(data))
+                .catch(err => console.error("Erreur de récupération des dossiers", err));
+        }
+    }, [clientEmail]);
 
     return (
         <div className="dashboard-container">
