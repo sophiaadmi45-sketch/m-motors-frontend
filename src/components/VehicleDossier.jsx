@@ -28,7 +28,15 @@ export default function VehicleDossier() {
         data.append('justificatifDomicile', form.domFile);
 
         const res = await fetch(`${API_BASE_URL}/api/dossiers/depot`, { method: 'POST', body: data });
-        setMsg(res.ok ? "Succès !" : "Erreur lors de l'envoi");
+        
+        if (res.ok) {
+            setMsg("Félicitations ! Ton dossier a bien été enregistré.");
+            setForm({ name: '', email: form.email, type: 'LLD', idFile: null, domFile: null });
+            e.target.reset(); 
+        } else {
+            setMsg("Erreur lors de l'envoi");
+        }
+    
     };
 
     return (
@@ -53,15 +61,58 @@ export default function VehicleDossier() {
                 </form>
             ) : (
                 <div>
-                    <input type="email" placeholder="Votre email" value={form.email} onChange={e => chercherSuivi(e.target.value)} className="suivi-input"/>
-                    <button className="btn btn-go-dashboard" onClick={() => navigate('/dashboard')}>
-                    Accéder à mon espace
+                    <div className="f-group">
+                        <label>Email :</label>
+                        <input 
+                            type="email" 
+                            placeholder="Ex: sophie@test.com" 
+                            value={form.email || ''} 
+                            required 
+                            onChange={e => setForm({...form, email: e.target.value})}
+                        />
+                    </div>
+
+                    <div className="f-group">
+                        <label>Mot de passe :</label>
+                        <input 
+                            type="password" 
+                            placeholder="••••••••" 
+                            value={form.password || ''} 
+                            required 
+                            onChange={e => setForm({...form, password: e.target.value})}
+                        />
+                    </div>
+
+                    <button 
+                        className="btn btn-go-dashboard" 
+                        onClick={async () => {
+                            if (!form.email || !form.password) {
+                                setMsg("Veuillez remplir votre email et votre mot de passe.");
+                                return;
+                            }
+
+                            try {
+                                const res = await fetch(`${API_BASE_URL}/api/auth/connexion`, {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ email: form.email, password: form.password })
+                                });
+
+                                const data = await res.json();
+
+                                if (res.ok) {
+                                    setMsg(""); 
+                                    navigate('/dashboard', { state: { email: data.email, role: data.role } });
+                                } else {
+                                    setMsg(data.message || "Échec de la connexion.");
+                                }
+                            } catch (error) {
+                                setMsg("Impossible de joindre le serveur d'authentification.");
+                            }
+                        }}
+                    >
+                        Accéder à mon espace
                     </button>
-                    {liste.map(d => (
-                        <div key={d.id} className="suivi-item">
-                            Dossier N°{d.id} ({d.typeContrat}) : <strong>{d.statut}</strong>
-                        </div>
-                    ))}
                 </div>
             )}
         </div>
