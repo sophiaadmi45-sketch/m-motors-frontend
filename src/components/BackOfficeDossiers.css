@@ -123,6 +123,9 @@
   border-collapse: collapse;
   text-align: left;
   table-layout: fixed; 
+  table-layout: auto;
+  min-width: 950px;
+
 }
 
 
@@ -139,14 +142,14 @@
   color: #64748b;
   font-weight: 600;
   font-size: 0.875rem;
-  padding: 1.0rem 1.25rem;
+  padding: 1.0rem 0.75rem;
   border-bottom: 0.0625rem solid #e2e8f0;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 .bo-table td {
-  padding: 1.0rem 1.25rem;
+  padding: 1.0rem 0.75rem;
   border-bottom: 0.0625rem solid #f1f5f9;
   color: #334155;
   font-size: 0.9375rem;
@@ -208,13 +211,22 @@
 .badge-status.refuse { background-color: #fee2e2; color: #b91c1c; }
 
 /* ==========================================================================
-   BOUTONS D'ACTION (MODERN & HORIZONTAL DESIGN)
+   BOUTONS D'ACTION 
    ========================================================================== */
 .bo-table td:nth-child(7) {
-  display: flex;
+   white-space: nowrap;
   gap: 0.5rem;
   align-items: center;
   border-bottom: none; 
+}
+
+.bo-table td:nth-child(7) .btn-action {
+  display: inline-block;
+  margin-right: 0.25rem;
+}
+
+.bo-table td:nth-child(7) button {
+  margin-right: 0.5rem; 
 }
 
 .btn-action {
