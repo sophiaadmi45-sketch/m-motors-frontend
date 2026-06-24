@@ -19,6 +19,8 @@ function Header() {
         </div>
         <nav className="nav">
           <Link to="/">Accueil</Link>
+          <Link to="/register">Inscription</Link>
+          <Link to="/login">Connexion</Link>
           <Link to="/dashboard">Mon Espace Client</Link>
           <div className="nav-dropdown-container">
     <button 

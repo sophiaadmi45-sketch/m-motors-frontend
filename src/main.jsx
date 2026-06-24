@@ -10,6 +10,7 @@ import VehicleDossier from './components/VehicleDossier';
 import Dashboard from './components/Dashboard.jsx'
 import BackOfficeDossiers from './components/BackOfficeDossiers.jsx';
 import BackOfficeVehicules from './components/BackOfficeVehicules'; 
+import Register from './components/Register.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -21,7 +22,8 @@ createRoot(document.getElementById('root')).render(
         <Route path="/dossier/:id" element={<VehicleDossier />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/back-office/dossiers" element={<BackOfficeDossiers />} />
-        <Route path="/espace-pro/vehicules" element={<BackOfficeVehicules />} /> 
+        <Route path="/espace-pro/vehicules" element={<BackOfficeVehicules />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
       <Footer />
     </BrowserRouter>
