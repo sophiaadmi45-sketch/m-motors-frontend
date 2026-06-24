@@ -1,6 +1,8 @@
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function Header() {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   return (
     <header className="header">
       <div className="header-container">
@@ -18,7 +20,33 @@ function Header() {
         <nav className="nav">
           <Link to="/">Accueil</Link>
           <Link to="/dashboard">Mon Espace Client</Link>
-          <Link to="/back-office/dossiers" className="nav-pro-link">Espace Pro</Link>
+          <div className="nav-dropdown-container">
+    <button 
+      className="nav-pro-link dropdown-trigger"
+      onClick={() => setDropdownOpen(!dropdownOpen)} // Ouvre et ferme au clic
+    >
+      Espace Pro {dropdownOpen ? '▴' : '▾'}
+    </button>
+
+    {dropdownOpen && (
+      <div className="nav-dropdown-menu">
+        <Link 
+          to="/back-office/dossiers" 
+          className="dropdown-item" 
+          onClick={() => setDropdownOpen(false)} // Ferme le menu après le clic
+        >
+          📁 Gestion des Dossiers
+        </Link>
+        <Link 
+          to="/espace-pro/vehicules" 
+          className="dropdown-item" 
+          onClick={() => setDropdownOpen(false)} // Ferme le menu après le clic
+        >
+          🚗 Gestion du Parc Auto
+        </Link>
+      </div>
+    )}
+  </div>
         </nav>
       </div>
     </header>

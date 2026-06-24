@@ -91,7 +91,67 @@ body {
   font-weight: 500;
   font-size: 0.95rem;
 }
+.nav-dropdown-container {
+  position: relative;
+  display: inline-block;
+}
 
+
+.dropdown-trigger {
+  background: none;
+  border: none;
+  color: var(--text-dark);
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+
+.nav-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0; 
+  background-color: white;
+  min-width: 13rem;
+  box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.1);
+  border: 0.0625rem solid #e2e8f0;
+  border-radius: 0.5rem;
+  z-index: 1000;
+  padding: 0.5rem 0;
+  margin-top: 0.25rem;
+}
+
+
+.dropdown-item {
+  display: block !important; 
+  width: 100%;
+  padding: 0.75rem 1rem !important;
+  color: var(--text-dark) !important;
+  text-decoration: none;
+  font-size: 0.9rem !important;
+  font-weight: 500;
+  text-align: left;
+  transition: background-color 0.2s ease;
+}
+
+
+.dropdown-item:hover {
+  background-color: #f1f5f9;
+  color: var(--accent) !important;
+}
+
+
+@media (min-width: 48rem) {
+  .nav-dropdown-menu {
+    left: auto;  
+    right: 0;     
+  }
+}
 /* ==========================================================================
    HERO & FILTERS
    ========================================================================== */
