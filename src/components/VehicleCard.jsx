@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 import { API_BASE_URL } from '../config';
 
- function VehicleCard({ vehicle }) {
- 
+function VehicleCard({ vehicle }) {
+
   const baseApiUrl = API_BASE_URL ? API_BASE_URL.replace(/\/$/, '') : '';
 
-  
+
   const estUneImageDuCloud = vehicle.imageUrl && (
-    vehicle.imageUrl.startsWith('/images') || 
+    vehicle.imageUrl.startsWith('/images') ||
     vehicle.imageUrl.includes('_')
   );
 
@@ -15,20 +15,29 @@ import { API_BASE_URL } from '../config';
     ? `${baseApiUrl}${vehicle.imageUrl}`
     : vehicle.imageUrl;
 
-  return(
+  return (
     <div className="vehicle-card">
       <img
-        src={cheminImage} 
+        src={cheminImage}
         alt={vehicle.modele}
         className="vehicle-image"
         onError={(e) => {
-  if (baseApiUrl && e.target.src.startsWith(baseApiUrl)) {
-    e.target.src = vehicle.imageUrl;
-  } else {
-    
-    console.error("L'image suivante a planté :", e.target.src);
-  }
-}}
+
+          console.error(`[DÉBUG IMAGE] Échec de chargement pour le véhicule ${vehicle.marque} ${vehicle.modele}. URL tentée :`, e.target.src);
+
+
+          if (baseApiUrl && e.target.src.startsWith(baseApiUrl)) {
+            e.target.style.display = 'none';
+          }
+
+          else if (estUneImageDuCloud && baseApiUrl) {
+            console.log(`[RATTRAPAGE] Redirection forcée de l'image vers le Back-end.`);
+            e.target.src = `${baseApiUrl}${vehicle.imageUrl}`;
+          }
+          else {
+            e.target.style.display = 'none';
+          }
+        }}
       />
       <div className="vehicle-info">
         <h3>{vehicle.marque} {vehicle.modele}</h3>
@@ -36,10 +45,10 @@ import { API_BASE_URL } from '../config';
         <p><strong>{vehicle.kilometrage.toLocaleString('fr-FR')} km</strong></p>
         <span className="type">{vehicle.type}</span>
         <p className="description">{vehicle.description}</p>
-        
+
         {vehicle.disponible && (
           <Link to={`/vehicule/${vehicle.id}`} className="btn-reserve">
-           Voir les détails
+            Voir les détails
           </Link>
         )}
       </div>
