@@ -5,11 +5,7 @@ function VehicleCard({ vehicle }) {
 
   const baseApiUrl = API_BASE_URL ? API_BASE_URL.replace(/\/$/, '') : '';
 
-
-  const estUneImageDuCloud = vehicle.imageUrl && (
-    vehicle.imageUrl.startsWith('/images') ||
-    vehicle.imageUrl.includes('_')
-  );
+  const estUneImageDuCloud = vehicle.imageUrl && vehicle.imageUrl.includes('_');
 
   const cheminImage = estUneImageDuCloud
     ? `${baseApiUrl}${vehicle.imageUrl}`
@@ -22,18 +18,12 @@ function VehicleCard({ vehicle }) {
         alt={vehicle.modele}
         className="vehicle-image"
         onError={(e) => {
-
           console.error(`[DÉBUG IMAGE] Échec de chargement pour le véhicule ${vehicle.marque} ${vehicle.modele}. URL tentée :`, e.target.src);
-
 
           if (baseApiUrl && e.target.src.startsWith(baseApiUrl)) {
             e.target.style.display = 'none';
-          }
+          } 
 
-          else if (estUneImageDuCloud && baseApiUrl) {
-            console.log(`[RATTRAPAGE] Redirection forcée de l'image vers le Back-end.`);
-            e.target.src = `${baseApiUrl}${vehicle.imageUrl}`;
-          }
           else {
             e.target.style.display = 'none';
           }
