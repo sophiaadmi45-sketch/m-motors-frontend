@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { API_BASE_URL } from '../config';
 import './BackOfficeVehicules.css';
 
@@ -7,6 +7,7 @@ export default function BackOfficeVehicules() {
     const [message, setMessage] = useState('');
     const [modeEdition, setModeEdition] = useState(false);
     const [idVehiculeEnCours, setIdVehiculeEnCours] = useState(null);
+    const fileInputRef = useRef(null);
 
     const initialFormState = {
         marque: '',
@@ -81,7 +82,7 @@ export default function BackOfficeVehicules() {
                 formData.append('disponible', form.disponible ? "true" : "false");
                 
                 
-                const fileInput = document.querySelector('input[type="file"]');
+                const fileInput = fileInputRef.current;
                 if (fileInput && fileInput.files[0]) {
                     formData.append('imageFile', fileInput.files[0]);
                 } else {
@@ -229,6 +230,7 @@ export default function BackOfficeVehicules() {
                         <label>Sélectionner la photo du véhicule :</label>
                         <input 
                             type="file" 
+                            ref={fileInputRef}
                             accept="image/png, image/jpeg, image/jpg, image/webp" 
                             required={!modeEdition} 
                         />
