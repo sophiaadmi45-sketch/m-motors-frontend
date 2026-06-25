@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
+import { API_BASE_URL } from '../config';
 
 function VehicleCard({ vehicle }) {
   return (
     <div className="vehicle-card">
       <img
-        src={vehicle.imageUrl}
+        src={`${API_BASE_URL}${vehicle.imageUrl}`} 
         alt={vehicle.modele}
         className="vehicle-image"
         onError={(e) => e.target.style.display = 'none'}

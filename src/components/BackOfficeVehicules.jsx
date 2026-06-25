@@ -158,25 +158,12 @@ export default function BackOfficeVehicules() {
                         {vehicules.map(v => (
                             <tr key={v.id}>
                                 <td className="text-bold">#CAR-{v.id}</td>
+
                                 <td>
-                                    <div className="bo-vehicle-cell">
-                                        {v.imageUrl ? (
-                                            <img
-                                                src={`${API_BASE_URL}${v.imageUrl}`}
-                                                alt={`${v.marque} ${v.modele}`}
-                                                className="bo-vehicle-thumb"
-                                            />
-                                        ) : (
-                                            <div className="bo-vehicle-no-thumb">
-                                                Pas de photo
-                                            </div>
-                                        )}
-                                        <div className="bo-vehicle-info">
-                                            <div className="text-bold">{v.marque}</div>
-                                            <div className="text-muted">{v.modele}</div>
-                                        </div>
-                                    </div>
+                                    <div className="text-bold">{v.marque}</div>
+                                    <div className="text-muted">{v.modele}</div>
                                 </td>
+
                                 <td>
                                     <span className={`type-tag ${v.type ? v.type.toLowerCase() : 'achat'}`}>
                                         {v.type === 'LLD' ? 'Location LLD' : 'Achat Direct'}
