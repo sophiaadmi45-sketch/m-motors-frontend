@@ -129,13 +129,27 @@
 }
 
 
-.bo-table th:nth-child(1), .bo-table td:nth-child(1) { width: 10%; } /* ID */
-.bo-table th:nth-child(2), .bo-table td:nth-child(2) { width: 20%; } /* Client */
-.bo-table th:nth-child(3), .bo-table td:nth-child(3) { width: 10%; } /* Option */
-.bo-table th:nth-child(4), .bo-table td:nth-child(4) { width: 12%; } /* Statut */
-.bo-table th:nth-child(5), .bo-table td:nth-child(5) { width: 15%; } /* Documents */
-.bo-table th:nth-child(6), .bo-table td:nth-child(6) { width: 18%; } /* Commentaire */
-.bo-table th:nth-child(7), .bo-table td:nth-child(7) { width: 15%; } /* Actions */
+.bo-table th:nth-child(1), .bo-table td:nth-child(1) { width: 8%; }  /* ID */
+.bo-table th:nth-child(2), .bo-table td:nth-child(2) { width: 15%; } /* Client */
+.bo-table th:nth-child(3), .bo-table td:nth-child(3) { width: 15%; } /* Véhicule */
+.bo-table th:nth-child(4), .bo-table td:nth-child(4) { width: 10%; } /* Option */
+.bo-table th:nth-child(5), .bo-table td:nth-child(5) { width: 10%; } /* Statut */
+.bo-table th:nth-child(6), .bo-table td:nth-child(6) { width: 14%; } /* Documents */
+.bo-table th:nth-child(7), .bo-table td:nth-child(7) { width: 14%; } /* Commentaire */
+.bo-table th:nth-child(8), .bo-table td:nth-child(8) { width: 14%; } /* Actions */
+
+/* Force l'alignement en ligne à l'intérieur de la cellule des actions */
+.bo-table td:nth-child(8) {
+  white-space: nowrap !important;
+}
+
+/* On force les boutons enfants à s'aligner horizontalement */
+.bo-table td:nth-child(8) button {
+  display: inline-block !important;
+  vertical-align: middle !important;
+  margin-right: 0.5rem !important;
+  margin-bottom: 0 !important; /* Supprime un éventuel retour à la ligne */
+}
 
 .bo-table th {
   background-color: #f8fafc;

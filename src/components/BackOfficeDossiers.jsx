@@ -4,6 +4,8 @@ import './BackOfficeDossiers.css';
 
 export default function BackOfficeDossiers() {
     const [dossiers, setDossiers] = useState([]);
+    const [vehicles, setVehicles] = useState([]);
+    
 
     const chargerDossiers = async () => {
         try {
@@ -20,8 +22,19 @@ export default function BackOfficeDossiers() {
    
     useEffect(() => {
         chargerDossiers();
+        chargerVehicules();
     }, []);
-
+const chargerVehicules = async () => {
+    try {
+        const res = await fetch(`${API_BASE_URL}/vehicles`);
+        if (res.ok) {
+            const data = await res.json();
+            setVehicles(data);
+        }
+    } catch (error) {
+        console.error("Erreur lors de la récupération des véhicules", error);
+    }
+};
     
     const [filtreStatut, setFiltreStatut] = useState('TOUS');
     const [commentaireSaisi, setCommentaireSaisi] = useState('');
@@ -70,7 +83,10 @@ export default function BackOfficeDossiers() {
         }
     };
 
-    
+    const obtenirNomVehicule = (vehicleId) => {
+    const v = vehicles.find(item => item.id === vehicleId);
+    return v ? `${v.marque} ${v.modele}` : `Véhicule #${vehicleId}`;
+};
     const dossiersFiltres = dossiers.filter(d => {
         if (filtreStatut === 'TOUS') return true;
         return d.statut === filtreStatut;
@@ -129,6 +145,7 @@ export default function BackOfficeDossiers() {
                         <tr>
                             <th>ID</th>
                             <th>Client</th>
+                            <th>Véhicule</th>
                             <th>Option</th>
                             <th>Statut</th>
                             <th>Documents justificatifs</th> 
@@ -144,6 +161,7 @@ export default function BackOfficeDossiers() {
                                     <div>{d.clientName}</div>
                                     <div className="text-muted">{d.clientEmail}</div>
                                 </td>
+                                <td className="text-bold">{obtenirNomVehicule(d.vehicleId)}</td>
                                 <td>{d.typeContrat}</td>
                                 <td>
                                     <span className={`badge-status ${d.statut.toLowerCase()}`}>

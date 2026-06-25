@@ -4,10 +4,10 @@ import { API_BASE_URL } from '../config';
 import './Dashboard.css';
 
 export default function Dashboard() {
-   
+
     const location = useLocation();
     const [dossiers, setDossiers] = useState([]);
-    const clientEmail = location.state?.email || "";
+    const clientEmail = location.state?.email || localStorage.getItem('userEmail') || "";
 
     useEffect(() => {
         if (clientEmail) {
@@ -44,8 +44,8 @@ export default function Dashboard() {
                                     <td className="text-bold">#DOS-{d.id}</td>
                                     <td>{d.typeContrat}</td>
                                     <td>
-                                        <span className={`badge-status ${d.statut.toLowerCase()}`}>
-                                            {d.statut.replace('_', ' ')}
+                                        <span className={`badge-status ${d.statut ? d.statut.toLowerCase() : 'en_cours'}`}>
+                                            {d.statut ? d.statut.replace('_', ' ') : 'En cours'}
                                         </span>
                                     </td>
                                 </tr>

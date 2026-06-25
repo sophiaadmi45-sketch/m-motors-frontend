@@ -11,6 +11,7 @@ import Dashboard from './components/Dashboard.jsx'
 import BackOfficeDossiers from './components/BackOfficeDossiers.jsx';
 import BackOfficeVehicules from './components/BackOfficeVehicules'; 
 import Register from './components/Register.jsx';
+import Login from './components/Login.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -24,6 +25,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/back-office/dossiers" element={<BackOfficeDossiers />} />
         <Route path="/espace-pro/vehicules" element={<BackOfficeVehicules />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
       <Footer />
     </BrowserRouter>

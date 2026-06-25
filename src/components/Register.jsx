@@ -64,13 +64,13 @@ const Register = () => {
     return (
         <div className="register-container">
             <form className="register-form" onSubmit={handleSubmit}>
-                <h2>Create an Account</h2>
+                <h2>Création de Compte</h2>
                 
                 {errorMessage && <div className="message error-message">{errorMessage}</div>}
                 {successMessage && <div className="message success-message">{successMessage}</div>}
 
                 <div className="form-group">
-                    <label htmlFor="firstName">First Name</label>
+                    <label htmlFor="firstName">Prénom</label>
                     <input
                         type="text"
                         id="firstName"
@@ -81,7 +81,7 @@ const Register = () => {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="lastName">Last Name</label>
+                    <label htmlFor="lastName">Nom</label>
                     <input
                         type="text"
                         id="lastName"
@@ -92,7 +92,7 @@ const Register = () => {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="email">Email Address</label>
+                    <label htmlFor="email">Adresse E-mail</label>
                     <input
                         type="email"
                         id="email"
@@ -103,7 +103,7 @@ const Register = () => {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="phone">Phone Number</label>
+                    <label htmlFor="phone">Numéro de Téléphone</label>
                     <input
                         type="tel"
                         id="phone"
@@ -114,7 +114,7 @@ const Register = () => {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="password">Password</label>
+                    <label htmlFor="password">Mot de passe</label>
                     <input
                         type="password"
                         id="password"
@@ -124,7 +124,7 @@ const Register = () => {
                     />
                 </div>
 
-                <button type="submit" className="btn-submit">Sign Up</button>
+                <button type="submit" className="btn-submit">S'inscrire</button>
             </form>
         </div>
     );
