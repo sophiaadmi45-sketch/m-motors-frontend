@@ -2,13 +2,26 @@ import { Link } from 'react-router-dom';
 import { API_BASE_URL } from '../config';
 
 function VehicleCard({ vehicle }) {
+  let cheminImage = vehicle.imageUrl;
+  
+  if (vehicle.imageUrl && vehicle.imageUrl.startsWith('/images')) {
+    
+    cheminImage = `${API_BASE_URL}${vehicle.imageUrl}`;
+  }
   return (
     <div className="vehicle-card">
       <img
-        src={`${API_BASE_URL}${vehicle.imageUrl}`} 
+        src={cheminImage} 
         alt={vehicle.modele}
         className="vehicle-image"
-        onError={(e) => e.target.style.display = 'none'}
+        onError={(e) => {
+          
+          if (e.target.src.startsWith(API_BASE_URL)) {
+            e.target.src = vehicle.imageUrl;
+          } else {
+            e.target.style.display = 'none';
+          }
+        }}
       />
       <div className="vehicle-info">
         <h3>{vehicle.marque} {vehicle.modele}</h3>
