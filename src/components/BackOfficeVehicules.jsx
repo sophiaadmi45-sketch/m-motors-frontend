@@ -12,7 +12,7 @@ export default function BackOfficeVehicules() {
     const initialFormState = {
         marque: '',
         modele: '',
-        type: 'ACHAT', 
+        type: 'ACHAT',
         prix: '',
         kilometrage: '',
         description: '',
@@ -52,7 +52,7 @@ export default function BackOfficeVehicules() {
 
         try {
             if (modeEdition) {
-               
+
                 const res = await fetch(`${API_BASE_URL}/vehicles/${idVehiculeEnCours}`, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
@@ -71,7 +71,7 @@ export default function BackOfficeVehicules() {
                     setMessage('❌ Erreur lors de la modification du véhicule.');
                 }
             } else {
-                
+
                 const formData = new FormData();
                 formData.append('marque', form.marque);
                 formData.append('modele', form.modele);
@@ -80,8 +80,8 @@ export default function BackOfficeVehicules() {
                 formData.append('kilometrage', form.kilometrage);
                 formData.append('description', form.description);
                 formData.append('disponible', form.disponible ? "true" : "false");
-                
-                
+
+
                 const fileInput = fileInputRef.current;
                 if (fileInput && fileInput.files[0]) {
                     formData.append('imageFile', fileInput.files[0]);
@@ -92,17 +92,17 @@ export default function BackOfficeVehicules() {
 
                 const res = await fetch(`${API_BASE_URL}/vehicles`, {
                     method: 'POST',
-                    body: formData 
+                    body: formData
                 });
 
                 if (res.ok) {
-                    setMessage('✅ Véhicule ajouté avec succès avec sa photo optimisée en WebP !');                                       
+                    setMessage('✅ Véhicule ajouté avec succès avec sa photo optimisée en WebP !');
                     annulerEdition();
                     chargerVehicules();
-                    if (fileInput) fileInput.value = '';         
+                    if (fileInput) fileInput.value = '';
                     e.target.reset();
                 } else {
-                    
+
                     setMessage('❌ Erreur lors de l\'ajout du véhicule au catalogue.');
                 }
             }
@@ -136,10 +136,10 @@ export default function BackOfficeVehicules() {
     return (
         <div className="bo-container">
             <h1 className="bo-title">Espace Back-Office — Gestion du Parc Automobile</h1>
-            
+
             {message && <div className="bo-alert">{message}</div>}
 
-            
+
             <h2 className="bo-section-subtitle">🚗 Liste des Véhicules en Catalogue</h2>
             <div className="table-responsive bo-table-wrapper">
                 <table className="bo-table">
@@ -159,8 +159,23 @@ export default function BackOfficeVehicules() {
                             <tr key={v.id}>
                                 <td className="text-bold">#CAR-{v.id}</td>
                                 <td>
-                                    <div className="text-bold">{v.marque}</div>
-                                    <div className="text-muted">{v.modele}</div>
+                                    <div className="bo-vehicle-cell">
+                                        {v.imageUrl ? (
+                                            <img
+                                                src={`${API_BASE_URL}${v.imageUrl}`}
+                                                alt={`${v.marque} ${v.modele}`}
+                                                className="bo-vehicle-thumb"
+                                            />
+                                        ) : (
+                                            <div className="bo-vehicle-no-thumb">
+                                                Pas de photo
+                                            </div>
+                                        )}
+                                        <div className="bo-vehicle-info">
+                                            <div className="text-bold">{v.marque}</div>
+                                            <div className="text-muted">{v.modele}</div>
+                                        </div>
+                                    </div>
                                 </td>
                                 <td>
                                     <span className={`type-tag ${v.type ? v.type.toLowerCase() : 'achat'}`}>
@@ -190,7 +205,7 @@ export default function BackOfficeVehicules() {
                 </table>
             </div>
 
-            
+
             <h2 className="bo-section-subtitle bo-form-title-spacing">
                 {modeEdition ? `📝 Modifier le véhicule #CAR-${idVehiculeEnCours}` : '➕ Ajouter un Nouveau Véhicule'}
             </h2>
@@ -228,11 +243,11 @@ export default function BackOfficeVehicules() {
                     </div>
                     <div className="form-group">
                         <label>Sélectionner la photo du véhicule :</label>
-                        <input 
-                            type="file" 
+                        <input
+                            type="file"
                             ref={fileInputRef}
-                            accept="image/png, image/jpeg, image/jpg, image/webp" 
-                            required={!modeEdition} 
+                            accept="image/png, image/jpeg, image/jpg, image/webp"
+                            required={!modeEdition}
                         />
                     </div>
                 </div>
