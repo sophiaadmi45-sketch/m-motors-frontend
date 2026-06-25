@@ -7,22 +7,24 @@ function Header() {
     <header className="header">
       <div className="header-container">
         <div className="logo">
-          <img
-            src="/images/logo.svg"
-            alt="M-Motors Logo"
-            className="logo-img"
-          />
+          <Link to="/">
+            <img
+              src="/images/logo.svg"
+              alt="M-Motors Logo"
+              className="logo-img"
+            />
+          </Link>
           <div className="logo-text">
             <h1>M-Motors</h1>
             <p className="logo-subtitle">La spécialité de la mobilité automobile : Achat, Location & Service</p>
           </div>
         </div>
-       <nav className="nav">
-          
-          
+        <nav className="nav">
+
+
           <div className="nav-top-row">
             <Link to="/">Accueil</Link>
-            
+
 
             {localStorage.getItem('isConnected') === 'true' ? (
               <>
@@ -50,7 +52,7 @@ function Header() {
             <div className="nav-links-row">
               <Link to="/dashboard">Mon Espace Client</Link>
 
-              
+
               {localStorage.getItem('userRole') === 'DIRECTEUR' && (
                 <div className="nav-dropdown-container">
                   <button
@@ -63,10 +65,10 @@ function Header() {
                   {dropdownOpen && (
                     <div className="nav-dropdown-menu">
                       <Link to="/back-office/dossiers" className="dropdown-item" onClick={() => setDropdownOpen(false)}>
-                       Gestion des Dossiers
+                        Gestion des Dossiers
                       </Link>
                       <Link to="/espace-pro/vehicules" className="dropdown-item" onClick={() => setDropdownOpen(false)}>
-                       Gestion du Parc Auto
+                        Gestion du Parc Auto
                       </Link>
                     </div>
                   )}
