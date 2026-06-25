@@ -22,13 +22,13 @@ import { API_BASE_URL } from '../config';
         alt={vehicle.modele}
         className="vehicle-image"
         onError={(e) => {
-         
-          if (baseApiUrl && e.target.src.startsWith(baseApiUrl)) {
-            e.target.src = vehicle.imageUrl;
-          } else {
-            e.target.style.display = 'none';
-          }
-        }}
+  if (baseApiUrl && e.target.src.startsWith(baseApiUrl)) {
+    e.target.src = vehicle.imageUrl;
+  } else {
+    
+    console.error("L'image suivante a planté :", e.target.src);
+  }
+}}
       />
       <div className="vehicle-info">
         <h3>{vehicle.marque} {vehicle.modele}</h3>
