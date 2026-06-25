@@ -11,6 +11,8 @@ function VehicleDetail() {
   const [vehicle, setVehicle] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const baseApiUrl = API_BASE_URL ? API_BASE_URL.replace(/\/$/, '') : '';
+
   useEffect(() => {
     fetch(`${API_BASE_URL}/vehicles/${id}`)
       .then(res => {
@@ -26,14 +28,36 @@ function VehicleDetail() {
   
   if (!vehicle) return <div className="app"><main className="main-content"><p className="detail-status">Véhicule introuvable ou indisponible (Erreur BDD)</p><Link to="/" className="back-link"> Retour</Link></main></div>;
 
+  const estUneImageDuCloud = vehicle.imageUrl && vehicle.imageUrl.includes('_');
+
+  const cheminImage = estUneImageDuCloud
+    ? `${baseApiUrl}${vehicle.imageUrl}`
+    : vehicle.imageUrl;
+
   return (
     <div className="app">
-     
       <main className="main-content">
         <Link to="/" className="back-link"> Retour</Link>
         <div className="detail-container">
           <div className="detail-media">
-            <img src={vehicle.imageUrl} alt={vehicle.modele} className="detail-image" />
+            <img 
+              src={cheminImage} 
+              alt={vehicle.modele} 
+              className="detail-image" 
+              onError={(e) => {
+               
+                console.error(`[DÉBUG IMAGE DÉTAIL] Échec pour ${vehicle.marque} ${vehicle.modele}. URL tentée :`, e.target.src);
+
+                if (baseApiUrl && e.target.src.startsWith(baseApiUrl)) {
+                  e.target.style.display = 'none';
+                } else if (estUneImageDuCloud && baseApiUrl) {
+                  console.log(`[RATTRAPAGE DÉTAIL] Redirection forcée vers le Back-end.`);
+                  e.target.src = `${baseApiUrl}${vehicle.imageUrl}`;
+                } else {
+                  e.target.style.display = 'none';
+                }
+              }}
+            />
           </div>
           <div className="detail-info">
             <span className="detail-badge">{vehicle.type}</span>
