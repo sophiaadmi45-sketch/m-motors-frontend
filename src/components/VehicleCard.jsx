@@ -1,22 +1,29 @@
 import { Link } from 'react-router-dom';
 import { API_BASE_URL } from '../config';
 
-function VehicleCard({ vehicle }) {
-  let cheminImage = vehicle.imageUrl;
+ function VehicleCard({ vehicle }) {
+ 
+  const baseApiUrl = API_BASE_URL ? API_BASE_URL.replace(/\/$/, '') : '';
+
   
-  if (vehicle.imageUrl && vehicle.imageUrl.startsWith('/images')) {
-    
-    cheminImage = `${API_BASE_URL}${vehicle.imageUrl}`;
-  }
-  return (
+  const estUneImageDuCloud = vehicle.imageUrl && (
+    vehicle.imageUrl.startsWith('/images') || 
+    vehicle.imageUrl.includes('_')
+  );
+
+  const cheminImage = estUneImageDuCloud
+    ? `${baseApiUrl}${vehicle.imageUrl}`
+    : vehicle.imageUrl;
+
+  return(
     <div className="vehicle-card">
       <img
         src={cheminImage} 
         alt={vehicle.modele}
         className="vehicle-image"
         onError={(e) => {
-          
-          if (e.target.src.startsWith(API_BASE_URL)) {
+         
+          if (baseApiUrl && e.target.src.startsWith(baseApiUrl)) {
             e.target.src = vehicle.imageUrl;
           } else {
             e.target.style.display = 'none';
