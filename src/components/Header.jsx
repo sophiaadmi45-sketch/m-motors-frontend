@@ -50,8 +50,11 @@ function Header() {
           {/* LIGNE 2 : Navigation fonctionnelle (Uniquement si connecté) */}
           {localStorage.getItem('isConnected') === 'true' && (
             <div className="nav-links-row">
-              <Link to="/dashboard">Mon Espace Client</Link>
 
+
+              {localStorage.getItem('userRole') !== 'DIRECTEUR' && (
+                <Link to="/dashboard">Mon Espace Client</Link>
+              )}
 
               {localStorage.getItem('userRole') === 'DIRECTEUR' && (
                 <div className="nav-dropdown-container">
